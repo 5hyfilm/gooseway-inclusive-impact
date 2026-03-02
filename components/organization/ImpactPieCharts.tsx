@@ -57,17 +57,18 @@ interface ChartCardProps {
 }
 
 const ChartCard = ({ title, data }: ChartCardProps) => (
-  <div className="bg-white p-8 rounded-[32px] border border-gray-100 shadow-sm flex flex-col items-center">
+  <div className="bg-white p-8 rounded-[32px] border border-gray-100 shadow-sm flex flex-col items-center w-full">
     <h3 className="text-sm font-bold text-gray-500 uppercase tracking-widest mb-6 text-center">
       {title}
     </h3>
-    <div className="w-full h-60 relative">
+    {/* ปรับความสูงจาก h-60 เป็น h-[300px] เพื่อให้พอดีกับ Legend */}
+    <div className="w-full h-[300px] relative">
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Pie
             data={data}
             cx="50%"
-            cy="50%"
+            cy="45%" // ขยับจุดศูนย์กลางขึ้นเล็กน้อยเพื่อเผื่อที่ให้ Legend ด้านล่าง
             labelLine={false}
             label={renderCustomizedLabel}
             outerRadius={80}
@@ -94,13 +95,15 @@ const ChartCard = ({ title, data }: ChartCardProps) => (
           />
           <Legend
             iconType="circle"
+            layout="horizontal"
+            verticalAlign="bottom"
+            align="center"
             wrapperStyle={{
-              fontSize: "12px",
-              fontWeight: "medium",
+              fontSize: "11px",
               paddingTop: "20px",
             }}
             formatter={(value) => (
-              <span className="text-gray-600 ml-2">{value}</span>
+              <span className="text-gray-600 font-medium">{value}</span>
             )}
           />
         </PieChart>
@@ -111,7 +114,8 @@ const ChartCard = ({ title, data }: ChartCardProps) => (
 
 export default function ImpactPieCharts() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+    // เปลี่ยนจาก grid-cols-2 เป็น flex-col เพื่อให้เรียงต่อกันในแนวตั้ง
+    <div className="flex flex-col gap-8 w-full">
       <ChartCard title="Obstacle Breakdown by Type" data={obstacleData} />
       <ChartCard title="Issue Resolution Status" data={resolutionData} />
     </div>
