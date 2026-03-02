@@ -8,6 +8,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image"; // นำเข้า Image component
 
 export default function OrganizationLayout({
   children,
@@ -21,7 +22,7 @@ export default function OrganizationLayout({
       href: "/organization/dashboard",
     },
     { icon: Users, label: "Volunteers", href: "/organization/volunteers" },
-    { icon: MapPin, label: "Impact Areas", href: "/organization/issues" }, // สมมติว่ามีหน้า issues
+    { icon: MapPin, label: "Impact Areas", href: "/organization/issues" },
     { icon: FileText, label: "ESG Reports", href: "/organization/reports" },
   ];
 
@@ -34,8 +35,14 @@ export default function OrganizationLayout({
             href="/organization/dashboard"
             className="flex items-center gap-3"
           >
-            <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-blue-200">
-              G
+            {/* แก้ไขส่วนโลโก้ Gooseway */}
+            <div className="relative w-10 h-10 overflow-hidden rounded-xl shadow-lg shadow-blue-200">
+              <Image
+                src="/gooseway-logo.jpg" // ใส่ path รูปของคุณ
+                alt="Gooseway Logo"
+                fill
+                className="object-cover"
+              />
             </div>
             <div>
               <h1 className="font-bold text-slate-900 leading-tight">
@@ -66,12 +73,23 @@ export default function OrganizationLayout({
 
         <div className="p-6 border-t border-slate-100">
           <div className="bg-slate-50 p-4 rounded-2xl mb-4">
-            <p className="text-xs font-bold text-slate-400 uppercase mb-1">
+            <p className="text-xs font-bold text-slate-400 uppercase mb-2">
               Signed in as
             </p>
-            <p className="text-sm font-bold text-slate-900 truncate">
-              Chulalongkorn University
-            </p>
+            {/* แก้ไขส่วนโลโก้ Chula */}
+            <div className="flex items-center gap-3">
+              <div className="relative w-8 h-8 flex-shrink-0">
+                <Image
+                  src="/chula-logo.png" // ใส่ path รูปของคุณ
+                  alt="Chulalongkorn University Logo"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              <p className="text-sm font-bold text-slate-900 leading-tight">
+                Chulalongkorn University
+              </p>
+            </div>
           </div>
           <button className="flex items-center gap-3 p-3 w-full text-slate-400 hover:text-rose-500 transition-colors font-bold text-sm">
             <LogOut className="w-5 h-5" />
@@ -80,7 +98,6 @@ export default function OrganizationLayout({
         </div>
       </aside>
 
-      {/* Main Content Area */}
       <main className="flex-1 lg:ml-72 min-h-screen">
         <div className="max-w-7xl mx-auto">{children}</div>
       </main>

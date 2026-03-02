@@ -63,8 +63,11 @@ export default function OrgDashboard() {
             Data-driven accessibility insights for Gooseway.
           </p>
         </div>
-        <button className="bg-white border-2 border-gray-100 px-6 py-3 rounded-2xl font-bold text-gray-700 hover:bg-gray-50 transition-all flex items-center gap-2 text-sm">
-          <ExternalLink className="w-4 h-4" /> Export Report
+
+        {/* ปรับปรุงปุ่ม Export Report ให้เด่นขึ้น */}
+        <button className="bg-blue-600 text-white px-8 py-3.5 rounded-2xl font-black text-sm flex items-center gap-3 hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-600/20 transition-all active:scale-95 shadow-lg shadow-blue-600/10">
+          <ExternalLink className="w-5 h-5" />
+          <span>Export Report</span>
         </button>
       </header>
 
